@@ -1,14 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import {QueryClient, QueryClientProvider} from 'react-query';
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import Home from "./Home";
+import LobbyList from "./game/LobbyList";
+
+// React Query provider
+const queryClient = new QueryClient()
+
+// Routing
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home/>
+    },
+    {
+        path: "/lobby",
+        element: <LobbyList/>
+    }
+])
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <App/>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router}/>
+        </QueryClientProvider>
     </React.StrictMode>
 );
 

@@ -1,5 +1,6 @@
 import axios from "../request";
 import {useQuery, useQueryClient} from "react-query";
+import {Link, Route, Routes} from "react-router-dom";
 
 
 async function getLobbies() {
@@ -11,19 +12,31 @@ async function getLobbies() {
 
 
 function LobbyList() {
-    const client = useQueryClient();
+    const client = useQueryClient(); // Returns client obj if needed.
+
     const {data, isLoading, isError} = useQuery({queryKey: ['getLobbies'], queryFn: getLobbies})
     if (isLoading) return <p>Is Loading</p>
-    if (isError) return  <p>Is error</p>
+    if (isError) return <p>Is error</p>
 
     return (
         <div>
+            {/* Header */}
             <div>
-                <a href={"#"}>Create new lobby</a>
+                <Link to={"create"}>Create new lobby</Link>
             </div>
-            {data.length}
+
+            {/* Body */}
+            <div>
+                {data.length}
+            </div>
+
+            {/* Routes */}
+            <Routes>
+                <Route path={"lobby/create"}/>
+            </Routes>
         </div>
     )
+
 }
 
 export default LobbyList
