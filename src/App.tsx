@@ -1,17 +1,26 @@
 import {QueryClient, QueryClientProvider} from 'react-query';
 import React from 'react';
 import LobbyList from "./game/LobbyList";
+import {BrowserRouter as Router, Link, Route, Routes} from "react-router-dom";
 
 
 const queryClient = new QueryClient()
 
 function App() {
     return (
-        <QueryClientProvider client={queryClient}>
-            <div className="App">
-                <LobbyList/>
-            </div>
-        </QueryClientProvider>
+        <Router>
+            <QueryClientProvider client={queryClient}>
+                <div className="App">
+                    <ul>
+                        <li><Link to={"/lobby"}>lobby</Link></li>
+                    </ul>
+                </div>
+
+                <Routes>
+                    <Route path={"/lobby"} element={<LobbyList/>}/>
+                </Routes>
+            </QueryClientProvider>
+        </Router>
     )
 }
 

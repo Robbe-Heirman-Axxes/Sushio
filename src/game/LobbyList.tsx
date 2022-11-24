@@ -1,5 +1,5 @@
 import axios from "../request";
-import {useQuery} from "react-query";
+import {useQuery, useQueryClient} from "react-query";
 
 
 async function getLobbies() {
@@ -11,6 +11,7 @@ async function getLobbies() {
 
 
 function LobbyList() {
+    const client = useQueryClient();
     const {data, isLoading, isError} = useQuery({queryKey: ['getLobbies'], queryFn: getLobbies})
     if (isLoading) return <p>Is Loading</p>
     if (isError) return  <p>Is error</p>
@@ -18,7 +19,7 @@ function LobbyList() {
     return (
         <div>
             <div>
-                <a>Create new lobby</a>
+                <a href={"#"}>Create new lobby</a>
             </div>
             {data.length}
         </div>
