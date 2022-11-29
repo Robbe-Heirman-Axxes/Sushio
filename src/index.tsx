@@ -5,6 +5,7 @@ import {QueryClient, QueryClientProvider} from 'react-query';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Home from "./Home";
 import LobbyList from "./game/LobbyList";
+import ErrorPage from "./ErrorPage";
 
 // React Query provider
 const queryClient = new QueryClient()
@@ -13,11 +14,13 @@ const queryClient = new QueryClient()
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home/>
+        element: <Home/>,
+        errorElement: <ErrorPage/>
     },
     {
         path: "/lobby",
-        element: <LobbyList/>
+        element: <LobbyList/>,
+        errorElement: <ErrorPage/>
     }
 ])
 
